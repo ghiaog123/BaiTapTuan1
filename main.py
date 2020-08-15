@@ -38,7 +38,7 @@ def find_baskets_frequent_item_appear(frequent_items, baskets):
                     
     return baskets_frequent_item_appear
 
-def find_same_basket(baskets_frequent_items_appear, s):
+def find_L2(baskets_frequent_items_appear, s):
     same_basket = []
     for i in baskets_frequent_items_appear.keys():
         for j in baskets_frequent_items_appear.keys():
@@ -127,16 +127,14 @@ def save_result(save_file, association_rules_2, association_rules_3):
                 break
 
 if __name__ == '__main__':
-    inputss = [['a','b'],['a','c','d'], ['a','b'],['a','c','e'],['c','d','e'],['c','d','b','f'],['c','a','d'],['q','o','c','d']]
-    s = 100
-    
+    s = int(input())
     inputs = read_input('browsing.txt')
     count_items = find_count_items(inputs)
     frequent_items = find_frequent_items(count_items, s)
     baskets_frequent_items_appear = find_baskets_frequent_item_appear(frequent_items, inputs)
-    same_basket = find_same_basket(baskets_frequent_items_appear, s)
-    association_rules_2 = find_association_rules_2(same_basket, frequent_items)
-    c3 = find_C3(same_basket)
+    l2 = find_L2(baskets_frequent_items_appear, s)
+    association_rules_2 = find_association_rules_2(l2, frequent_items)
+    c3 = find_C3(l2)
     association_rules_3 = find_association_rules_3(c3, frequent_items, baskets_frequent_items_appear, s)
     save_result('output.txt', association_rules_2,association_rules_3)
     
